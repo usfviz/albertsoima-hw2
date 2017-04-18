@@ -37,7 +37,7 @@ ui <- fluidPage(
     ),
   fluidRow(
   column(10, "Year", sliderInput("years", NULL, width="100%", min = 1960, max = 2014, value = 1960, sep = "",
-                        animate=animationOptions(interval=500), step=1, ticks=FALSE)),
+                        animate=animationOptions(interval=300), step=1, ticks=FALSE)),
   column(2, "Population Scaler", sliderInput("pop", NULL, min = 0, max = 1, value = 0.5, step = 0.01, ticks=FALSE))
   )
 )
@@ -68,7 +68,7 @@ server <- function(input, output) {
     
     if(is.null(checkregion())){
       tempdf$opac <- rep(1, nrow(tempdf))
-    } else if(checkregion() == "All"){
+    } else if(checkregion()[1] == "All"){
       tempdf$opac <- rep(1, nrow(tempdf))
     } else {
       tempdf[!(tempdf$Region %in% checkregion()), "opac"] <- 0.1
